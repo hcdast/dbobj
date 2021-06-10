@@ -40,7 +40,7 @@ func TestQuery(t *testing.T) {
 		//	Va14 string
 		//	Va15 string
 	}
-	rows, err := dbobj.Default.Query("select * from FTP_BUSIZ_METHOD_RELATION t")
+	rows, err := dbobj.Query("select * from FTP_BUSIZ_METHOD_RELATION t")
 	defer rows.Close()
 	if err != nil {
 		fmt.Errorf("%v", err)
@@ -97,7 +97,7 @@ func TestScanDB(t *testing.T) {
 		//	Va14 string
 		//	Va15 string
 	}
-	rows, err := dbobj.Default.Query("select * from FTP_BUSIZ_METHOD_RELATION t")
+	rows, err := dbobj.Query("select * from FTP_BUSIZ_METHOD_RELATION t")
 	defer rows.Close()
 	if err != nil {
 		fmt.Errorf("%v", err)

@@ -2,7 +2,7 @@
  * @Author: hc
  * @Date: 2021-06-07 10:55:03
  * @LastEditors: hc
- * @LastEditTime: 2021-06-07 11:24:42
+ * @LastEditTime: 2021-06-10 15:59:09
  * @Description:
  */
 package dbhandle
@@ -23,13 +23,12 @@ const (
 type instance func() DbObj
 
 var (
-	dbLock  = new(sync.RWMutex)
+	dbLock  = new(sync.RWMutex) // 锁 Mutex：goroutine级锁会阻塞进程  RWMutex：读写锁
 	Adapter = make(map[string]instance)
 )
 
 // Database handle function list
 // Every database drive must implements this interface
-//
 type DbObj interface {
 	// Query database
 	Query(sql string, args ...interface{}) (*sql.Rows, error)

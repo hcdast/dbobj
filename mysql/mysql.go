@@ -16,6 +16,7 @@ type mysql struct {
 	db *sql.DB
 }
 
+// 连接数据库
 func NewMySQL() dbhandle.DbObj {
 
 	var err error
@@ -31,6 +32,8 @@ func NewMySQL() dbhandle.DbObj {
 	usr, _ := red.Get("DB.user")
 	pad, _ := red.Get("DB.passwd")
 	mc, _ := red.Get("DB.maxConn")
+
+	// 设置最大连接数
 	maxConn := 100
 	if len(mc) != 0 {
 		mx, err := strconv.Atoi(mc)
@@ -38,7 +41,7 @@ func NewMySQL() dbhandle.DbObj {
 			maxConn = mx
 		}
 	}
-
+	// 密码解密
 	if len(pad) == 24 {
 		pad, err = aes.Decrypt(pad)
 		if err != nil {
@@ -53,6 +56,7 @@ func NewMySQL() dbhandle.DbObj {
 		logger.Error("open oracle database failed.", err.Error())
 		return nil
 	}
+	// 密码加密
 	if len(pad) != 24 {
 		psd, err := aes.Encrypt(pad)
 		if err != nil {
@@ -156,6 +160,7 @@ func (this *mysql) QueryRow(sql string, args ...interface{}) *sql.Row {
 	return this.db.QueryRow(sql, args...)
 }
 
+// 注册mysql数据库
 func init() {
 	dbhandle.Register("mysql", NewMySQL)
 }
