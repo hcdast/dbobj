@@ -77,7 +77,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/hzwy23/dbobj"
+	"example-hauth/dbobj"
 )
 
 type UserInfo struct {
